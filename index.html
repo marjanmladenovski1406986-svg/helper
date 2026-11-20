@@ -1,355 +1,190 @@
 <!DOCTYPE html>
 <html lang="mk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Здрава храна Нина — природни производи на мерење и пакувани. Ореви, семки, суво овошје, чаеви и билки.">
-<title>Здрава храна Нина — Каталог</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-body{background:#f7f7f3;color:#1a1a1a}
-header{position:sticky;top:0;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;box-shadow:0 1px 10px rgba(0,0,0,.08);z-index:10}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
-.logo span{width:42px;height:42px;background:#0f5132;color:#fff;border-radius:50%;display:grid;place-items:center;font-size:22px}
-.logo small{color:#0f5132}
-.cartbtn{background:#111;color:#fff;border:0;padding:10px 18px;border-radius:999px;font-weight:700;cursor:pointer}
-.hero{padding:28px 16px;background:linear-gradient(135deg,#0f5132,#198754);color:#fff}
-.hero h1{font-size:36px;line-height:1.1;max-width:700px}
-.hero p{margin:14px 0;opacity:.9;max-width:600px}
-.hero button{background:#fbbf24;border:0;padding:12px 20px;border-radius:999px;font-weight:800;cursor:pointer}
-.wrap{max-width:1100px;margin:auto;padding:16px}
-.search{width:100%;padding:14px 16px;border-radius:999px;border:1px solid #ddd;font-size:16px;margin:14px 0}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.tabs button{padding:9px 16px;border-radius:999px;border:1px solid #ddd;background:#eee;cursor:pointer;font-weight:600}
-.tabs button.active{background:#0f5132;color:#fff;border-color:#0f5132}
-.cats{display:flex;gap:8px;overflow:auto;padding-bottom:8px}
-.cats button{white-space:nowrap;padding:9px 14px;border-radius:999px;border:1px solid #ddd;background:#fff;cursor:pointer}
-.cats button.active{background:#0f5132;color:#fff}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
-@media(min-width:800px){.grid{grid-template-columns:repeat(4,1fr)}.hero h1{font-size:52px}}
-.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.img{height:150px;display:grid;place-items:center;font-size:64px;background:#f0ead8}
-.badge{display:inline-block;background:#fbbf24;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:12px 0 0 12px}
-.card-body{padding:12px 14px 16px}
-.brand{color:#0f5132;font-weight:800;font-size:12px;letter-spacing:1px}
-.card h3{font-size:16px;margin:6px 0}
-.muted{color:#777;font-size:13px}
-.price{font-size:20px;font-weight:800;margin-top:10px}
-.row{display:flex;justify-content:space-between;align-items:end}
-.add{background:#0f5132;color:#fff;border:0;padding:9px 16px;border-radius:999px;font-weight:700;cursor:pointer}
-footer{background:#fff;margin-top:30px;padding:24px 16px}
-footer h4{margin-bottom:8px} footer p{color:#555;line-height:1.7}
-#drawer{position:fixed;right:0;top:0;width:min(420px,100%);height:100%;background:#fff;box-shadow:-10px 0 30px rgba(0,0,0,.2);transform:translateX(105%);transition:.3s;padding:18px;overflow:auto;z-index:50}
-#drawer.open{transform:none}
-#overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:40}
-#overlay.show{display:block}
-.item{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #eee}
-input,select{width:100%;padding:11px;border:1px solid #ddd;border-radius:10px;margin:6px 0}
-.order{background:#0f5132;color:#fff;border:0;width:100%;padding:13px;border-radius:999px;font-weight:800;cursor:pointer;margin-top:10px}
-.qty{display:flex;align-items:center;gap:6px;margin-top:6px}
-.qty button{width:28px;height:28px;border-radius:50%;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:16px;line-height:1}
-.qty span{min-width:20px;text-align:center;font-weight:700}
-.empty{grid-column:1/-1;text-align:center;padding:40px;color:#777}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моја Заштеда</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
 
-/* Модал за грамажа */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;place-items:center;z-index:60;padding:16px}
-.modal.show{display:grid}
-.modal-box{background:#fff;border-radius:20px;padding:20px;width:min(420px,100%);box-shadow:0 20px 60px rgba(0,0,0,.3)}
-.modal-box h3{margin-bottom:6px}
-.gram-options{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0}
-.gram-options button{padding:14px;border:2px solid #ddd;border-radius:12px;background:#fff;cursor:pointer;font-weight:700;font-size:15px}
-.gram-options button.sel{border-color:#0f5132;background:#e8f5ee;color:#0f5132}
-.custom-gram input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px}
-.modal-actions{display:flex;gap:8px;margin-top:14px}
-.btn-primary{flex:1;background:#0f5132;color:#fff;border:0;padding:13px;border-radius:999px;font-weight:800;cursor:pointer}
-.btn-ghost{background:#eee;border:0;padding:13px 18px;border-radius:999px;cursor:pointer;font-weight:700}
-.gram-preview{background:#f7f7f3;padding:10px 14px;border-radius:10px;margin-top:10px;font-weight:700;color:#0f5132;text-align:center}
-</style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .card-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .balance-box {
+            background: linear-gradient(135deg, #f6f9fc 0%, #eef2f7 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .balance-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .balance-amount {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .balance-currency {
+            font-size: 18px;
+            color: #667eea;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #555;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.7;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>💳 Моја Заштеда</h1>
+            <p>Моја омилена продавница — секогаш за мене!</p>
+        </div>
 
-<header>
-  <div class="logo"><span>🌿</span><div>Здрава храна<br><small>Нина</small></div></div>
-  <button class="cartbtn" onclick="openCart()" aria-label="Отвори кошничка">🛍️ Кошничка (<span id="count">0</span>)</button>
-</header>
+        <div class="card">
+            <div class="card-title">Моја Картичка</div>
+            <div class="card-subtitle">Број: #0001</div>
 
-<section class="hero">
-  <p>ПРИРОДНО • КВАЛИТЕТНО • ВКУСНО</p>
-  <h1>Здрава храна за секојдневие</h1>
-  <p>Природни производи на мерење и пакувани — изберете колку ви треба, а ние ќе ја подготвиме вашата нарачка.</p>
-  <button onclick="document.getElementById('katalog').scrollIntoView({behavior:'smooth'})">Кон производите ↓</button>
-</section>
-
-<div class="wrap" id="katalog">
-  <h2>Каталог</h2>
-  <p id="found" class="muted">Пронајдени производи: 24</p>
-  <input class="search" id="q" placeholder="🔍 Пребарај производ или бренд" oninput="render()" aria-label="Пребарај">
-  <div class="tabs" id="typeTabs"></div>
-  <div class="cats" id="catTabs"></div>
-  <div class="grid" id="grid"></div>
-</div>
-
-<footer>
-  <div class="wrap">
-    <h3>🌿 Здрава храна Нина</h3>
-    <p>Природни производи на мерење и пакувани — изберете колку ви треба, а ние ќе ја подготвиме вашата нарачка.</p><br>
-    <h4>НАВИГАЦИЈА</h4>
-    <p>Почетна<br>Производи<br>Вработени</p><br>
-    <h4>КОНТАКТ</h4>
-    <p>📍 Скопје, Македонија<br>📞 +389 70 000 000<br>✉️ kontakt@hrananina.mk</p><br>
-    <h4>РАБОТНО ВРЕМЕ</h4>
-    <p>Пон–Пет: 08:00 – 19:00<br>Саб: 09:00 – 14:00</p>
-  </div>
-</footer>
-
-<div id="overlay" onclick="closeCart()"></div>
-
-<aside id="drawer" aria-label="Кошничка">
-  <h2>Кошничка <button style="float:right;border:0;background:#eee;padding:6px 12px;border-radius:999px;cursor:pointer" onclick="closeCart()" aria-label="Затвори">✕</button></h2>
-  <div id="items"></div>
-  <h3 id="total" style="margin-top:14px">Вкупно: 0 ден.</h3>
-  <h4 style="margin-top:16px">Податоци за нарачка</h4>
-  <input id="name" placeholder="Име и презиме" autocomplete="name">
-  <input id="phone" placeholder="Телефон" type="tel" autocomplete="tel">
-  <input id="addr" placeholder="Адреса за достава" autocomplete="street-address">
-  <button class="order" onclick="order()">Нарачај →</button>
-  <p id="msg" style="color:#0f5132;font-weight:700;margin-top:10px"></p>
-</aside>
-
-<!-- Модал за грамажа -->
-<div id="gramModal" class="modal">
-  <div class="modal-box">
-    <h3 id="gmTitle">Изберете грамажа</h3>
-    <div class="gram-options" id="gramOptions"></div>
-    <div class="custom-gram">
-      <input type="number" id="customGram" min="10" max="5000" step="10" placeholder="Друга грамажа (г)" oninput="updatePreview()">
-    </div>
-    <div class="gram-preview" id="gramPreview"></div>
-    <div class="modal-actions">
-      <button class="btn-ghost" onclick="closeGram()">Откажи</button>
-      <button class="btn-primary" onclick="confirmGram()">Додај во кошничка</button>
-    </div>
-  </div>
-</div>
-
-<script>
-const P = [
-  ["Бадеми сецкан лист","НИНА","На мерење",1000,"🌰","Ореви и семки"],
-  ["Бразилски ореви","","На мерење",1500,"🥜","Ореви и семки"],
-  ["Индиски орев печени","","На мерење",850,"🥜","Ореви и семки"],
-  ["Индиски орев непечени","","На мерење",820,"🥜","Ореви и семки"],
-  ["Кајсија","","На мерење",1100,"🍑","Суво овошје"],
-  ["Камилица","НИНА","На мерење",690,"🌼","Чаеви и билки"],
-  ["Кикирики печени солени","","На мерење",300,"🥜","Ореви и семки"],
-  ["Кикирики печени со зачини","","На мерење",350,"🥜","Ореви и семки"],
-  ["Урма кралска","","На мерење",1000,"🌴","Суво овошје"],
-  ["Фстак непечен","","На мерење",1300,"🫒","Ореви и семки"],
-  ["Фстак печен","","На мерење",1300,"🫒","Ореви и семки"],
-  ["Црвена леќа","НИНА","На мерење",200,"🫘","Мешунки"],
-  ["Чај од маслинов лист","НИНА","Пакувано",350,"🍃","Чаеви и билки"],
-  ["Ореви","","На мерење",650,"🌰","Ореви и семки"],
-  ["Лешници","","На мерење",950,"🌰","Ореви и семки"],
-  ["Семки од сончоглед","","На мерење",280,"🌻","Ореви и семки"],
-  ["Чиа семе","","На мерење",650,"✨","Ореви и семки"],
-  ["Ленено семе","","На мерење",250,"✨","Ореви и семки"],
-  ["Овесни снегулки","","На мерење",180,"🥣","Мешунки"],
-  ["Суво грозје","","На мерење",380,"🍇","Суво овошје"],
-  ["Сливи суви","","На мерење",450,"🍑","Суво овошје"],
-  ["Чај од нане","НИНА","Пакувано",280,"🌿","Чаеви и билки"],
-  ["Чај од жалфија","НИНА","Пакувано",300,"🌿","Чаеви и билки"],
-  ["Куркума","","На мерење",700,"🟡","Чаеви и билки"]
-];
-
-let type = "Сите", cat = "Сите", cart = [];
-let gramTarget = null, selectedGram = 250;
-
-const types = ["Сите","Пакувано","На мерење"];
-const cats = ["Сите","Ореви и семки","Суво овошје","Чаеви и билки","Мешунки"];
-
-/* ---------- Помошни ---------- */
-function fmt(n){ return n.toLocaleString('mk-MK'); }
-
-function saveCart(){ localStorage.setItem('nina_cart', JSON.stringify(cart)); }
-function loadCart(){
-  try{ cart = JSON.parse(localStorage.getItem('nina_cart')) || []; }
-  catch(e){ cart = []; }
-}
-
-/* ---------- Табови и рендер ---------- */
-function tabs(){
-  document.getElementById('typeTabs').innerHTML = types.map(t =>
-    `<button class="${t===type?'active':''}" onclick="type='${t}';render()">${t}</button>`).join('');
-  document.getElementById('catTabs').innerHTML = cats.map(c =>
-    `<button class="${c===cat?'active':''}" onclick="cat='${c}';render()">${c==='Сите'?'Сите производи (24)':c}</button>`).join('');
-}
-
-function render(){
-  tabs();
-  const q = document.getElementById('q').value.trim().toLowerCase();
-  const list = P
-    .map((p,i) => ({p,i}))
-    .filter(({p}) =>
-      (type==='Сите' || p[2]===type) &&
-      (cat==='Сите' || p[5]===cat) &&
-      (p[0].toLowerCase().includes(q) || p[1].toLowerCase().includes(q))
-    );
-
-  document.getElementById('found').textContent = 'Пронајдени производи: ' + list.length;
-
-  document.getElementById('grid').innerHTML = list.length
-    ? list.map(({p,i}) => `
-      <div class="card">
-        <div class="img">${p[4]}</div>
-        <span class="badge">${p[2]}</span>
-        <div class="card-body">
-          ${p[1] ? `<div class="brand">${p[1]}</div>` : ''}
-          <h3>${p[0]}</h3>
-          <div class="muted">${p[5]}</div>
-          <div class="row">
-            <div>
-              <div class="price">${fmt(p[3])} ден.</div>
-              <div class="muted">${p[2]==='Пакувано' ? 'за пакување' : 'за 1 kg'}</div>
+            <div class="balance-box">
+                <div class="balance-label">💰 Моментална заштеда</div>
+                <div class="balance-amount">0,00 <span class="balance-currency">ден</span></div>
             </div>
-            <button class="add" onclick="add(${i})">Додај</button>
-          </div>
+
+            <div class="info-row">
+                <span class="info-label">Име</span>
+                <span class="info-value">---</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Вкупно заштедено досега</span>
+                <span class="info-value">0 ден</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Последна посета</span>
+                <span class="info-value">---</span>
+            </div>
+
+            <button class="btn btn-primary" onclick="alert('Клиентот овде ќе ја скенира својата картичка!')">
+                📲 Моја картичка
+            </button>
+            
+            <button class="btn btn-secondary" onclick="alert('Најави се како продавач')">
+                🏪 Најава за продавач
+            </button>
         </div>
-      </div>`).join('')
-    : '<div class="empty">😕 Нема пронајдени производи. Пробајте друг термин.</div>';
-}
 
-/* ---------- Додавање во кошничка ---------- */
-function add(idx){
-  const p = P[idx];
-  if (p[2] === 'Пакувано'){
-    pushToCart(idx, 1);
-    return;
-  }
-  gramTarget = idx;
-  selectedGram = 250;
-  document.getElementById('gmTitle').textContent = p[0];
-  renderGramOptions();
-  updatePreview();
-  document.getElementById('gramModal').classList.add('show');
-}
-
-function renderGramOptions(){
-  const opts = [100,250,500,1000];
-  document.getElementById('gramOptions').innerHTML = opts.map(g =>
-    `<button type="button" class="${g===selectedGram?'sel':''}" onclick="pickGram(${g})">${g} г</button>`).join('');
-}
-
-function pickGram(g){
-  selectedGram = g;
-  document.getElementById('customGram').value = '';
-  renderGramOptions();
-  updatePreview();
-}
-
-function getSelectedGram(){
-  const custom = parseInt(document.getElementById('customGram').value);
-  return custom > 0 ? custom : selectedGram;
-}
-
-function updatePreview(){
-  if (gramTarget === null) return;
-  const g = getSelectedGram();
-  const p = P[gramTarget];
-  const price = Math.round(p[3] * g / 1000);
-  document.getElementById('gramPreview').textContent = `${g} г → ${fmt(price)} ден.`;
-}
-
-function confirmGram(){
-  const g = getSelectedGram();
-  if (g < 10 || g > 5000){ alert('Грамажата мора да биде помеѓу 10 и 5000 г'); return; }
-  pushToCart(gramTarget, g);
-  closeGram();
-}
-
-function closeGram(){
-  document.getElementById('gramModal').classList.remove('show');
-  gramTarget = null;
-}
-
-function pushToCart(idx, g){
-  const p = P[idx];
-  const packed = p[2] === 'Пакувано';
-  const price = packed ? p[3] : Math.round(p[3] * g / 1000);
-  const existing = cart.find(x => x.idx === idx && x.g === g);
-  if (existing) existing.qty++;
-  else cart.push({ idx, name: p[0], g, price, qty: 1, packed });
-  saveCart();
-  update();
-  openCart();
-}
-
-/* ---------- Кошничка ---------- */
-function update(){
-  const count = cart.reduce((s,x) => s + x.qty, 0);
-  document.getElementById('count').textContent = count;
-
-  const total = cart.reduce((s,x) => s + x.price * x.qty, 0);
-  document.getElementById('total').textContent = 'Вкупно: ' + fmt(total) + ' ден.';
-
-  document.getElementById('items').innerHTML = cart.length
-    ? cart.map((x,i) => `
-      <div class="item">
-        <div>
-          <b>${x.name}</b><br>
-          <span class="muted">${x.packed ? '1 пакување' : x.g + ' г'}</span>
+        <div class="footer">
+            © 2026 Моја Заштеда. Сите права се задржани.
         </div>
-        <div style="text-align:right">
-          <b>${fmt(x.price * x.qty)} ден.</b>
-          <div class="qty">
-            <button onclick="dec(${i})" aria-label="Намали">−</button>
-            <span>${x.qty}</span>
-            <button onclick="inc(${i})" aria-label="Зголеми">+</button>
-            <button onclick="del(${i})" aria-label="Избриши">🗑️</button>
-          </div>
-        </div>
-      </div>`).join('')
-    : '<p class="muted" style="margin-top:12px">Кошничката е празна.</p>';
-}
-
-function inc(i){ cart[i].qty++; saveCart(); update(); }
-function dec(i){ if (--cart[i].qty <= 0) cart.splice(i,1); saveCart(); update(); }
-function del(i){ cart.splice(i,1); saveCart(); update(); }
-
-function openCart(){
-  document.getElementById('drawer').classList.add('open');
-  document.getElementById('overlay').classList.add('show');
-}
-function closeCart(){
-  document.getElementById('drawer').classList.remove('open');
-  document.getElementById('overlay').classList.remove('show');
-}
-
-/* ---------- Нарачка ---------- */
-function order(){
-  if (!cart.length){ alert('Кошничката е празна'); return; }
-  const name = document.getElementById('name').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const addr = document.getElementById('addr').value.trim();
-
-  if (!name || !phone){ alert('Внесете име и телефон'); return; }
-  if (!/^[\d\s+\-()]{6,}$/.test(phone)){ alert('Внесете валиден телефон'); return; }
-
-  const total = cart.reduce((s,x) => s + x.price * x.qty, 0);
-  const summary = cart.map(x => `${x.name} (${x.packed ? '1 пак.' : x.g + 'г'}) x${x.qty}`).join(', ');
-  console.log('Нарачка:', { name, phone, addr, total, items: summary });
-
-  document.getElementById('msg').textContent =
-    `✅ Ви благодариме, ${name}! Нарачката е примена. Ќе ве контактираме наскоро.`;
-
-  cart = [];
-  saveCart();
-  update();
-  setTimeout(closeCart, 2000);
-}
-
-/* ---------- Старт ---------- */
-loadCart();
-render();
-update();
-</script>
+    </div>
 </body>
 </html>
